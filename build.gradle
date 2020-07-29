@@ -1,0 +1,32 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group 'com.markkarlsrud'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.41'
+    implementation group: 'net.postgis', name: 'postgis-jdbc', version: '2.5.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation 'com.hazelcast:hazelcast:4.0.1'
+//    implementation 'com.hazelcast:hazelcast-spring:4.0.1'
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.hibernate:hibernate-entitymanager'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
