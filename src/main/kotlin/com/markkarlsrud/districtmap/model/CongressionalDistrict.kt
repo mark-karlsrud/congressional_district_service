@@ -1,12 +1,13 @@
 package com.markkarlsrud.districtmap.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.postgis.PGgeometry
 import java.sql.ResultSet
 
 data class CongressionalDistrict(
     val gid: Int,
-    val state: String,
-    private val districtProcessingSeriesCode: String,
+    val state: StateFederalInformationProcessingSeries,
+    val districtProcessingSeriesCode: String,
     val geoid: String,
     val description: String,
     val lsad: LegalStatisticalAreaDescription,
@@ -25,7 +26,7 @@ data class CongressionalDistrict(
                 result.getString("statefp").let {
                     StateFederalInformationProcessingSeries.get(
                         it
-                    ).description
+                    )
                 },
                 result.getString("cd116fp"),
                 result.getString("geoid"),
@@ -108,7 +109,8 @@ data class GeoLocation(
 /**
  * https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696
  */
-internal enum class StateFederalInformationProcessingSeries(val value: String, val description: String) {
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+enum class StateFederalInformationProcessingSeries(val value: String, val description: String) {
     // TODO add state codes like AZ
     ALABAMA("01", "Alabama"),
     ALASKA("02", "Alaska"),
