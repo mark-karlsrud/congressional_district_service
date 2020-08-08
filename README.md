@@ -25,9 +25,15 @@ Spring boot application for determining a US Congressional District based on loc
     ```
     SELECT * FROM <your_table> as district WHERE ST_CONTAINS(district.geom, ST_GeomFromText('Point(<longitude> <latitude>)'))
     ```
+
 1. Checkout this project and customize `district_map.properties` accordingly.
 
 1. Run this application
-```
-./gradlew bootRun
-```
+    ```
+    ./gradlew bootRun
+    ```
+
+1. Test it out
+    ```
+    curl 'http://localhost:8080/district/map?longitude=-77.0112392&latitude=38.8899389'
+    ```
